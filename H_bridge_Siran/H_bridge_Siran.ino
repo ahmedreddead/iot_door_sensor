@@ -1,8 +1,9 @@
 
 
 // Set GPIOs for H-bridge 
-const int led = 23;
-const int gnd = 25;
+const int vcc = 26;
+const int gnd = 27;
+
 // M1 POSITIVE 
 
 RTC_DATA_ATTR int bootCount = 0;
@@ -16,7 +17,7 @@ char* password = "Micropolis@212";
 char* mqtt_server = "10.20.0.31";
 int mqtt_port = 1883;
 
-Micropolis_Siren Siren_object(led,gnd);
+Micropolis_Siren Siren_object(vcc,gnd);
 
 void setup() {
     Serial.begin(115200);
@@ -27,12 +28,11 @@ void setup() {
     reconnect();
     Siren_object.mqtt_publish("Micropolis/Siren", "online");
     
-
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  delay(500);
+  delay(50);
   loop_client();
 
 }
